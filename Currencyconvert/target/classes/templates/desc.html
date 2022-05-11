@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+<head th:replace=header::link>
+<meta charset="ISO-8859-1">
+</head>
+<body>
+	<nav th:replace=header::navs></nav>
+
+
+	<section>
+
+		<div class="row">
+
+			<div class="col-md-5 m-2">
+				<div class="card-deck">
+					<div class="card">
+						<div class="card-body">
+							<img alt="sd" th:src="@{img/b1.jpg}" class="img-thumbnail">
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="offset-1 col-md-5 mt-4">
+				<span class="desc_pro_txt">Fresh Tomato-Red</span> <br> <span>Price:
+					<strong>Rs 30 <small class="desc_pricetxt">(Rs.30/Kg)</small></strong>
+				</span>
+			
+				<div class="input-group mb-3 mt-3 w-25 qty_input_group">
+					<div class="input-group-prepend">
+						<button class="input-group-text desc_qty_minus">-</button>
+					</div>
+					<input type="number" class="form-control desc_pro_qty" min="1"  value="1" placeholder="Qty">
+					<div class="input-group-append">
+						<button class="input-group-text desc_qty_plus">+</button>
+					</div>
+					
+				</div>
+				<span><small class="text-success font-weight-bold mx-2">Product Available</small></span>
+				<div class="desc_add_cart">
+					<button class="desc_cart_btn">Add To Cart</button>
+				</div>
+			</div>
+		</div>
+		<hr>
+		
+		
+
+	</section>
+
+
+	<footer th:replace="footer::js"></footer>
+</body>
+</html>

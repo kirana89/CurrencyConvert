@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<div >
+
+		
+		<footer id="about" th:fragment="js">
+				<div class="footer_about text-center mt-3">
+			<h2>
+				<u>About Us</u>
+			</h2>
+		</div>
+			<section class="cart_modal">
+
+
+
+				<!-- The Modal -->
+				<div class="modal fade" id="myCart">
+					<div class="modal-dialog">
+						<div class="modal-content">
+
+							<!-- Modal Header -->
+							<div class="modal-header">
+								<h4 class="modal-title text-danger mx-3">ScaleUp-Cart</h4>
+								<button type="button" class="close" data-dismiss="modal">&times;</button>
+							</div>
+
+							<!-- Modal body -->
+							<div class="modal-body">
+								<small>
+									<table class="table table-hover">
+										<thead>
+											<tr>
+												<th>S.N</th>
+												<th>Product</th>
+												<th>Quantity</th>
+												<th>Price</th>
+												<th>Total</th>
+											</tr>
+										</thead>
+										<tbody>
+											<tr>
+												<td>1</td>
+												<td>Tomato</td>
+												<td>
+													<div class="w-25">
+														<input type="number" class="w-75" min="1" value="1"
+															placeholder="Qty">
+													</div>
+
+												</td>
+												<td >30.Rs</td>
+												<td class="cart_item_price">30 Rs</td>
+											</tr>
+											<tr>
+												<td>2</td>
+												<td>Ilaichi</td>
+												<td>
+													<div class="w-25">
+														<input type="number" class="w-75" min="1" value="1"
+															placeholder="Qty">
+													</div>
+
+												</td>
+												<td>20.Rs</td>
+											</tr>
+										</tbody>
+
+									</table>
+								</small>
+
+							</div>
+
+							<!-- Modal footer -->
+							<div class="modal-footer">
+								<div class="mr-5">
+									Total Price: <strong>90.Rs</strong>
+								</div>
+								<button type="button" class="btn btn-warning">Place
+									Order</button>
+								<button type="button" class="btn btn-danger"
+									data-dismiss="modal">Close</button>
+							</div>
+
+						</div>
+					</div>
+				</div>
+				<div class="msg" th:text="${msg}" ></div>
+			</section>
+
+		
+
+		<script
+			src="https://cdn.jsdelivr.net/npm/jquery@3.6.0/dist/jquery.slim.min.js"></script>
+
+		<!-- Popper JS -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+
+		<!-- Latest compiled JavaScript -->
+		<script
+			src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.1/dist/js/bootstrap.bundle.min.js"></script>
+			<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
+		<!-- /*===============================jQuery==============================================*/	 -->
+			<script type="text/javascript">
+			
+			
+			$(document).ready(function(){
+				$(".msg").hide();
+				let v=1;
+				$(".desc_qty_plus").click(function(){
+					v=v+1;
+					var p=v*30;
+					$('.desc_pro_qty').val(v);
+					$('.cart_item_price').html(p +".Rs");
+				});
+				
+				$(".desc_qty_minus").click(function(){
+					v=v-1;
+					if(v<=0){
+						$('.desc_pro_qty').val(1);
+						v=1;
+					}else{
+						$('.desc_pro_qty').val(v);
+						
+						
+					}
+				});
+				
+				/*=========Signup Validation  */
+			/* 	$("#signup").click(function(e){
+					
+					e.preventDefault();
+					
+					var name=$("#name").val();
+					var mno=$("#mno").val();
+					var email=$("#email").val();
+					var address=$("#address").val();
+					var password=$("#password").val();
+				
+					
+					
+					var a=[$('#name'),$('#mno'),$('#email'),$('#address'),$('#password')];
+					var all=[name,mno,email,address,password];
+					if(all[0]=="" && all[1]=="" && all[2]=="" && all[3] == "" && all[4]=="")
+					{
+						a[0].addClass('is-invalid');
+						a[1].addClass('is-invalid');
+						a[2].addClass('is-invalid');
+						a[3].addClass('is-invalid');
+						a[4].addClass('is-invalid');
+						$(".msg").html("<span></span>")
+						
+					}
+					else{
+						if(all[0]=="")
+						{
+							a[0].addClass('is-invalid');
+							return false;
+						}
+						else
+						{
+							a[0].addClass('is-valid');
+							a[0].removeClass('is-invalid');
+						}
+						
+						if(all[1]=="")
+						{
+							a[1].addClass('is-invalid');
+							return false;
+						}
+						else
+						{
+							a[1].addClass('is-valid');
+							a[1].removeClass('is-invalid');
+						}
+						if(all[2]=="")
+						{
+							a[2].addClass('is-invalid');
+							return false;
+						}
+						else
+						{
+							a[2].addClass('is-valid');
+							a[2].removeClass('is-invalid');
+						}
+						if(all[3]=="")
+						{
+							a[3].addClass('is-invalid');
+							return false;
+						}
+						else
+						{
+							a[3].addClass('is-valid');
+							a[3].removeClass('is-invalid');
+						}
+						if(all[4]=="")
+						{
+							a[4].addClass('is-invalid');
+							return false;
+						}
+						else
+						{
+							a[4].addClass('is-valid');
+							a[4].removeClass('is-invalid');
+						}
+				
+						$.ajax({
+							url:"/onsignup",
+							method:"POST",
+							data:{
+								"name":name,
+								"mno":mno,
+								"email":email,
+								"address":address,
+								"password":password
+								
+							},
+							success:function(e){
+								if(e==1){
+									alert("Email Already Exist");
+								}else if(e==0){
+									alert("Registered Successfully");
+									window.location.href="http://localhost:8080/login";
+								}else{
+									alert("something Went Wrong");
+								}
+							}
+							
+						});
+					}
+					
+				}); */
+		/*===============================Login===============================================  */		
+			/* 	$("#login").click(function(e){
+					e.preventDefault();
+					var password=$("#password").val();
+					var email=$("#email").val();
+					
+					var a=[$('#email'),$('#password')];
+					var all=[email,password];
+					if(all[0]=="" && all[1]=="")
+					{
+						a[0].addClass('is-invalid');
+						a[1].addClass('is-invalid');
+						
+						
+					}
+					else{
+						if(all[0]=="")
+						{
+							a[0].addClass('is-invalid');
+							return false;
+						}
+						else
+						{
+							a[0].addClass('is-valid');
+							a[0].removeClass('is-invalid');
+						}
+						
+						if(all[1]=="")
+						{
+							a[1].addClass('is-invalid');
+							return false;
+						}
+						else
+						{
+							a[1].addClass('is-valid');
+							a[1].removeClass('is-invalid');
+						}
+						
+						$.ajax({
+							url:"/onlogin",
+							method:"POST",
+							data:{
+								
+								"email":email,
+								"password":password
+								
+							},
+							success:function(e){
+								if(e==1){
+									alert("Login");
+									window.location.href="http://localhost:8080";
+								}else if(e==0){
+									alert("Invalid Credentials");
+								}else{
+									alert("something Went Wrong");
+								}
+							}
+							
+						});
+						
+					}
+				}); */
+				});
+			
+			</script>
+			</footer>
+
+</body>
+</html>
